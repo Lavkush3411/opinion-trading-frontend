@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Input, Select, Button, Modal, Form, InputNumber, Spin } from "antd";
-import { SearchOutlined, PlusOutlined } from "@ant-design/icons";
+import { Select, Button, Modal, Form, InputNumber, Spin, Input } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useMarkets, useMarketCategories, useCreateTrade } from "../hooks";
 import MarketCard from "../components/markets/MarketCard";
 import { Market } from "../types/api.types";
@@ -53,16 +53,14 @@ const Home: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen w-full bg-gray-900">
       <div className="w-full px-4 py-8">
         <div className="flex flex-col space-y-8 max-w-7xl mx-auto">
           {/* Header Section */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                Markets
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
+              <h1 className="text-3xl font-bold text-white">Markets</h1>
+              <p className="text-gray-400 mt-1">
                 Trade on predictions and outcomes
               </p>
             </div>
@@ -77,26 +75,28 @@ const Home: React.FC = () => {
           </div>
 
           {/* Search and Filter Section */}
-          <div className="flex flex-col md:flex-row gap-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
+          <div className="flex flex-col md:flex-row gap-4 p-4 rounded-lg shadow-sm">
             <Input
               placeholder="Search markets..."
-              prefix={<SearchOutlined className="text-gray-400" />}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="max-w-md"
-              size="large"
+              className="max-w-md text-white bg-gray-800 px-4 py-2 rounded-lg border border-gray-700"
             />
             <Select
-              placeholder="Select category"
-              value={selectedCategory}
+              placeholder="Select Category"
+              value={selectedCategory === "" ? null : selectedCategory}
               onChange={setSelectedCategory}
-              className="min-w-[200px]"
+              className="min-w-[200px] text-white custom-select"
               loading={categoriesLoading}
               allowClear
               size="large"
             >
               {categories?.map((category) => (
-                <Option key={category.id} value={category.id}>
+                <Option
+                  className="text-white "
+                  key={category.id}
+                  value={category.id}
+                >
                   {category.name}
                 </Option>
               ))}

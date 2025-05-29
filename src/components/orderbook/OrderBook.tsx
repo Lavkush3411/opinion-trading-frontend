@@ -24,7 +24,7 @@ const noData = [
 ];
 function OrderBook() {
   return (
-    <Card title="Order Book" style={{ width: "100%" }}>
+    <Card title="Order Book" className="bg-gray-900" style={{ width: "100%" }}>
       <Row gutter={16}>
         {/* YES Chart */}
         <Chart data={yesData} color="green" title="YES" />

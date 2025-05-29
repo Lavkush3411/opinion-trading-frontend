@@ -8,9 +8,7 @@ import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
-  BulbOutlined,
 } from "@ant-design/icons";
-import { useTheme } from "../../context/ThemeContext";
 import { useUserProfile } from "../../hooks";
 import { ItemType } from "antd/es/menu/interface";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +21,6 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const { data: userProfile } = useUserProfile();
 
@@ -89,23 +86,23 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        className="bg-white dark:bg-gray-800"
+        className="bg-gray-800"
       >
         <div className="h-16 flex items-center justify-center">
-          <h1 className="text-xl font-bold text-blue-600 dark:text-blue-400">
+          <h1 className="text-xl font-bold text-blue-400">
             {collapsed ? "OT" : "Opinion Trading"}
           </h1>
         </div>
         <Menu
-          theme={theme}
+          theme="dark"
           mode="inline"
           defaultSelectedKeys={["home"]}
           items={menuItems}
-          className="border-r-0"
+          className="border-r-0 bg-gray-800"
         />
       </Sider>
       <Layout className="w-full">
-        <Header className="bg-white dark:bg-gray-800 px-4 flex w-full items-center justify-between">
+        <Header className="bg-gray-800 px-4 flex w-full items-center justify-between">
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -113,12 +110,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             className="text-lg"
           />
           <div className="flex items-center space-x-4">
-            <Button
-              type="text"
-              icon={<BulbOutlined />}
-              onClick={toggleTheme}
-              className="text-lg"
-            />
             <Dropdown
               menu={{ items: userMenuItems as ItemType[] }}
               placement="bottomRight"
@@ -126,7 +117,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               <div className="flex items-center space-x-2 cursor-pointer">
                 <Avatar icon={<UserOutlined />} />
                 {!collapsed && (
-                  <span className="text-sm font-medium">
+                  <span className="text-sm font-medium text-white">
                     {userProfile?.username || "User"}
                   </span>
                 )}
@@ -134,7 +125,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             </Dropdown>
           </div>
         </Header>
-        <Content className="bg-white dark:bg-gray-800 flex rounded-lg h-full w-full">
+        <Content className="bg-gray-900 flex rounded-lg h-full w-full">
           {children}
         </Content>
       </Layout>

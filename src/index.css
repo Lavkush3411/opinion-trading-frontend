@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+    @apply bg-gray-900 text-gray-100;
   }
 }
 
@@ -14,11 +14,11 @@
   }
 
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
+    @apply bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300;
   }
 
   .input-primary {
-    @apply border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400;
+    @apply border-gray-600 focus:border-blue-400 focus:ring-blue-400;
   }
 }
 
@@ -26,11 +26,10 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #141414;
   box-sizing: border-box;
-  background-color: #f0f0f0;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -68,4 +67,9 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.ant-select.custom-select .ant-select-selector {
+  background-color: transparent;
+  background-color: #1f2937;
 }

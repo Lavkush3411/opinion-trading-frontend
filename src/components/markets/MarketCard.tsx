@@ -114,7 +114,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
               onClick={() => navigateToTrade(market)}
               className="bg-blue-600 hover:bg-blue-700 shadow-sm"
             >
-              Order Book
+              Details
             </Button>
             <Button
               type="primary"
