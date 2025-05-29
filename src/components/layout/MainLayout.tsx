@@ -13,6 +13,7 @@ import {
 import { useTheme } from "../../context/ThemeContext";
 import { useUserProfile } from "../../hooks";
 import { ItemType } from "antd/es/menu/interface";
+import { useNavigate } from "react-router-dom";
 
 const { Header, Sider, Content } = Layout;
 
@@ -23,6 +24,7 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
   const { data: userProfile } = useUserProfile();
 
   const menuItems = [
@@ -30,21 +32,33 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       key: "home",
       icon: <HomeOutlined />,
       label: "Home",
+      onClick: () => {
+        navigate("/");
+      },
     },
     {
       key: "markets",
       icon: <LineChartOutlined />,
       label: "Markets",
+      onClick: () => {
+        navigate("/markets");
+      },
     },
     {
       key: "profile",
       icon: <UserOutlined />,
       label: "Profile",
+      onClick: () => {
+        navigate("/profile");
+      },
     },
     {
       key: "settings",
       icon: <SettingOutlined />,
       label: "Settings",
+      onClick: () => {
+        navigate("/settings");
+      },
     },
   ];
 

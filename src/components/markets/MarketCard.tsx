@@ -6,13 +6,14 @@ import {
   InfoCircleOutlined,
 } from "@ant-design/icons";
 import { Market } from "../../types/api.types";
-
+import { useNavigate } from "react-router-dom";
 interface MarketCardProps {
   market: Market;
   onTrade: (market: Market) => void;
 }
 
-const MarketCard: React.FC<MarketCardProps> = ({ market, onTrade }) => {
+const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
+  const navigate = useNavigate();
   const yesPercentage =
     (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
   const noPercentage = 100 - yesPercentage;
@@ -24,6 +25,11 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, onTrade }) => {
       return `$${(volume / 1000).toFixed(1)}K`;
     }
     return `$${volume}`;
+  };
+
+  const navigateToTrade = (market: Market) => {
+    console.log("market");
+    navigate(`/trade/${market.id}`);
   };
 
   return (
@@ -105,14 +111,14 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, onTrade }) => {
           <div className="mt-4 flex justify-end flex justify-between">
             <Button
               type="primary"
-              onClick={() => onTrade(market)}
+              onClick={() => navigateToTrade(market)}
               className="bg-blue-600 hover:bg-blue-700 shadow-sm"
             >
               Order Book
             </Button>
             <Button
               type="primary"
-              onClick={() => onTrade(market)}
+              onClick={() => navigateToTrade(market)}
               className="bg-blue-600 hover:bg-blue-700 shadow-sm"
             >
               Trade
