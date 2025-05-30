@@ -2,6 +2,7 @@ import { Form, Input, Button, Card, message, Alert } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { ROUTES } from "../_common/routes";
 
 interface ResetPasswordForm {
   newPassword: string;
@@ -26,7 +27,7 @@ const ResetPassword = () => {
         values.newPassword
       );
       message.success("Password has been reset successfully!");
-      navigate("/auth");
+      navigate(ROUTES.AUTH.LOGIN);
     } catch (error) {
       console.log(error);
       message.error("Failed to reset password. Please try again.");
@@ -109,7 +110,7 @@ const ResetPassword = () => {
           <div className="text-center">
             <Button
               type="link"
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate(ROUTES.AUTH.LOGIN)}
               className="text-blue-400 hover:text-blue-300"
             >
               Back to Login

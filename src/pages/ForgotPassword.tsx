@@ -2,6 +2,7 @@ import { Form, Input, Button, Card, message } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../_common/routes";
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,7 @@ const ForgotPassword = () => {
       // TODO: Implement request reset link logic here
       console.log("Request reset link for:", values.email);
       message.success("Password reset link has been sent to your email!");
-      navigate("/auth");
+      navigate(ROUTES.AUTH.LOGIN);
     } catch (error) {
       message.error("Failed to send reset link. Please try again.");
     } finally {
@@ -65,7 +66,7 @@ const ForgotPassword = () => {
           <div className="text-center">
             <Button
               type="link"
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate(ROUTES.AUTH.LOGIN)}
               className="text-blue-400 hover:text-blue-300"
             >
               Back to Login

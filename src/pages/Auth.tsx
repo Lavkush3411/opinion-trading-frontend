@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Input, Button, Card, Tabs, message } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../_common/routes";
 
 interface LoginForm {
   email: string;
@@ -23,7 +24,7 @@ const Auth = () => {
       // TODO: Implement login logic here
       console.log("Login values:", values);
       message.success("Login successful!");
-      navigate("/dashboard");
+      navigate(ROUTES.DASHBOARD.HOME);
     } catch (error) {
       console.log(error);
       message.error("Login failed. Please try again.");
@@ -39,8 +40,8 @@ const Auth = () => {
       console.log("Signup values:", values);
       message.success("Signup successful! Please login.");
       setActiveTab("login");
-    } catch (_error) {
-      console.log(_error);
+    } catch (error) {
+      console.log(error);
       message.error("Signup failed. Please try again.");
     } finally {
       setLoading(false);
@@ -98,7 +99,7 @@ const Auth = () => {
                   <div className="flex justify-end mb-4">
                     <Button
                       type="link"
-                      onClick={() => navigate("/forgot-password")}
+                      onClick={() => navigate(ROUTES.AUTH.FORGOT_PASSWORD)}
                       className="text-blue-400 hover:text-blue-300 p-0"
                     >
                       Forgot Password?
