@@ -103,14 +103,7 @@ const Chart = ({
           margin={{ top: 5, right: 30, left: 60, bottom: 5 }}
         >
           <XAxis type="number" reversed hide domain={[0, total]} />
-          <YAxis
-            type="category"
-            dataKey="price"
-            tick={{ fill: "#9ca3af" }}
-            axisLine={{ stroke: "#4b5563" }}
-            tickLine={{ stroke: "#4b5563" }}
-            width={50}
-          />
+          <YAxis type="category" dataKey="price" hide />
           <Tooltip
             contentStyle={{
               backgroundColor: "#1f2937",
@@ -128,6 +121,14 @@ const Chart = ({
             radius={[0, 4, 4, 0]}
             background={{ fill: "rgba(255, 255, 255, 0.05)" }}
           >
+            {/* Price label at the very left inside the filled bar */}
+            <LabelList
+              dataKey="price"
+              position="insideLeft"
+              style={{ fill: "#fff", fontWeight: 700, fontSize: 12 }}
+              formatter={(price: string) => price}
+            />
+            {/* Quantity label at the end of the bar */}
             <LabelList
               dataKey="count"
               position="right"
