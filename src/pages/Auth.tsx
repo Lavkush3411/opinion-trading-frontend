@@ -1,52 +1,24 @@
 import { useState } from "react";
-import { Form, Input, Button, Card, Tabs, message } from "antd";
+import { Form, Input, Button, Card, Tabs } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../_common/routes";
+import { useLogin, useSignup } from "../hooks";
 
-interface LoginForm {
-  email: string;
-  password: string;
-}
+// interface LoginForm {
+//   email: string;
+//   password: string;
+// }
 
-interface SignupForm extends LoginForm {
-  confirmPassword: string;
-}
+// interface SignupForm extends LoginForm {
+//   confirmPassword: string;
+// }
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  const onLogin = async (values: LoginForm) => {
-    try {
-      setLoading(true);
-      // TODO: Implement login logic here
-      console.log("Login values:", values);
-      message.success("Login successful!");
-      navigate(ROUTES.DASHBOARD.HOME);
-    } catch (error) {
-      console.log(error);
-      message.error("Login failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const onSignup = async (values: SignupForm) => {
-    try {
-      setLoading(true);
-      // TODO: Implement signup logic here
-      console.log("Signup values:", values);
-      message.success("Signup successful! Please login.");
-      setActiveTab("login");
-    } catch (error) {
-      console.log(error);
-      message.error("Signup failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { mutate: signup, isPending: isSigningUp } = useSignup();
+  const { mutate: login, isPending: isLoggingIn } = useLogin();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">
@@ -62,7 +34,7 @@ const Auth = () => {
               children: (
                 <Form
                   name="login"
-                  onFinish={onLogin}
+                  onFinish={login}
                   layout="vertical"
                   className="mt-4"
                 >
@@ -110,7 +82,7 @@ const Auth = () => {
                     <Button
                       type="primary"
                       htmlType="submit"
-                      loading={loading}
+                      loading={isLoggingIn}
                       className="w-full bg-blue-600 hover:bg-blue-700"
                     >
                       Login
@@ -125,10 +97,23 @@ const Auth = () => {
               children: (
                 <Form
                   name="signup"
-                  onFinish={onSignup}
+                  onFinish={signup}
                   layout="vertical"
                   className="mt-4"
                 >
+                  <Form.Item
+                    name="name"
+                    rules={[
+                      { required: true, message: "Please input your name!" },
+                      { message: "Please enter a valid name!" },
+                    ]}
+                  >
+                    <Input
+                      prefix={<MailOutlined />}
+                      placeholder="Name"
+                      className="bg-gray-700 border-gray-600 text-white"
+                    />
+                  </Form.Item>
                   <Form.Item
                     name="email"
                     rules={[
@@ -194,7 +179,7 @@ const Auth = () => {
                     <Button
                       type="primary"
                       htmlType="submit"
-                      loading={loading}
+                      loading={isSigningUp}
                       className="w-full bg-blue-600 hover:bg-blue-700"
                     >
                       Sign Up
