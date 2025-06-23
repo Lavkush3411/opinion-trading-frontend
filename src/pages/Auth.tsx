@@ -5,14 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../_common/routes";
 import { useLogin, useSignup } from "../hooks";
 
-// interface LoginForm {
-//   email: string;
-//   password: string;
-// }
 
-// interface SignupForm extends LoginForm {
-//   confirmPassword: string;
-// }
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
