@@ -12,6 +12,7 @@ import {
 import { useUserProfile } from "../../hooks";
 import { ItemType } from "antd/es/menu/interface";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../_common/routes";
 
 const { Header, Sider, Content } = Layout;
 
@@ -23,6 +24,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const { data: userProfile } = useUserProfile();
+  const logout = () => {
+    localStorage.removeItem("token");
+    return navigate(ROUTES.AUTH.AUTH);
+  };
 
   const menuItems = [
     {
@@ -77,6 +82,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       key: "logout",
       icon: <LogoutOutlined />,
       label: "Logout",
+      onClick: logout,
     },
   ];
 
