@@ -4,4 +4,7 @@ export const API_ROUTES = {
     SIGNUP: "/auth/signup",
     LOGIN: "/auth/login",
   },
+  MARKET: {
+    MARKETS: "/market/markets",
+  },
 };

@@ -1,14 +1,12 @@
 export interface Market {
   id: string;
-  title: string;
+  question: string;
   description: string;
-  category: string;
-  endDate: string;
+  category?: string;
+  result: string | null;
+  // endDate: string;
   yesPrice: number;
   noPrice: number;
-  totalVolume: number;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export interface Trade {
@@ -16,7 +14,7 @@ export interface Trade {
   marketId: string;
   userId: string;
   amount: number;
-  position: 'YES' | 'NO';
+  position: "YES" | "NO";
   price: number;
   createdAt: string;
 }
@@ -45,10 +43,10 @@ export interface CreateMarketData {
 export interface CreateTradeData {
   marketId: string;
   amount: number;
-  position: 'YES' | 'NO';
+  position: "YES" | "NO";
 }
 
 export interface ResolutionData {
-  resolution: 'YES' | 'NO';
+  resolution: "YES" | "NO";
   explanation: string;
-} 
+}

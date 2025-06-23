@@ -45,7 +45,7 @@ const Home: React.FC = () => {
 
   const filteredMarkets = markets?.filter((market) => {
     const matchesSearch =
-      market.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      market.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
       market.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
       !selectedCategory || market.category === selectedCategory;
