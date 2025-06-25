@@ -34,7 +34,8 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
 
   return (
     <Card
-      className="w-full h-full hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+      className="w-full cursor-pointer h-full hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"
+      onClick={() => navigateToTrade(market)}
       title={
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">
@@ -108,20 +109,12 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
             </Tooltip> */}
           </div>
 
-          <div className="mt-4 flex justify-end flex justify-between">
-            <Button
-              type="primary"
-              onClick={() => navigateToTrade(market)}
-              className="bg-blue-600 hover:bg-blue-700 shadow-sm"
-            >
-              Details
+          <div className="mt-4 flex justify-end flex gap-4">
+            <Button className="bg-green-600 !hover:bg-red-700 shadow-sm w-full">
+              Yes
             </Button>
-            <Button
-              type="primary"
-              onClick={() => navigateToTrade(market)}
-              className="bg-blue-600 hover:bg-blue-700 shadow-sm"
-            >
-              Trade
+            <Button className="bg-red-600 !hover:bg-red-700 shadow-sm w-full">
+              No
             </Button>
           </div>
         </div>

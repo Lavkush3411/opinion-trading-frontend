@@ -15,8 +15,8 @@ const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const { setSelectedMarket } = useMarketStore();
   const { data: markets, isLoading: marketsLoading } = useMarkets();
-  const { data: categories, isLoading: categoriesLoading } =
-    useMarketCategories();
+  // const { data: categories, isLoading: categoriesLoading } =
+  //   useMarketCategories();
   const { setIsTradeModalVisible, setIsCreateMarketModalVisible } =
     useModelStore();
 
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* Search and Filter Section */}
-          <div className="flex flex-col md:flex-row gap-4 p-4 rounded-lg shadow-sm">
+          {/* <div className="flex flex-col md:flex-row gap-4 p-4 rounded-lg shadow-sm">
             <Input
               placeholder="Search markets..."
               value={searchTerm}
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                 </Option>
               ))}
             </Select>
-          </div>
+          </div> */}
 
           {/* Markets Container */}
           {marketsLoading ? (

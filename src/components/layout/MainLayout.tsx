@@ -9,7 +9,7 @@ import {
   SettingOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { useUserProfile } from "../../hooks";
+import { useActiveUser } from "../../hooks";
 import { ItemType } from "antd/es/menu/interface";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../_common/routes";
@@ -23,7 +23,7 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const { data: userProfile } = useUserProfile();
+  const { data: userProfile } = useActiveUser();
   const logout = () => {
     localStorage.removeItem("token");
     return navigate(ROUTES.AUTH.AUTH);
@@ -124,7 +124,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 <Avatar icon={<UserOutlined />} />
                 {!collapsed && (
                   <span className="text-sm font-medium text-white">
-                    {userProfile?.username || "User"}
+                    {userProfile?.name || "User"}
                   </span>
                 )}
               </div>
