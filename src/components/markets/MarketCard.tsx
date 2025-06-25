@@ -14,11 +14,9 @@ interface MarketCardProps {
 
 const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
   const navigate = useNavigate();
-  // const yesPercentage =
-  //   (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
-  // const noPercentage = 100 - yesPercentage;
-  const yesPercentage = 0;
-  const noPercentage = 0;
+  const yesPercentage =
+    (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
+  const noPercentage = 100 - yesPercentage;
 
   const formatVolume = (volume: number) => {
     if (volume >= 1000000) {
@@ -68,9 +66,9 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
             <span className="text-green-600 dark:text-green-400 font-medium flex items-center">
               <ArrowUpOutlined className="mr-1" /> Yes
             </span>
-            {/* <span className="font-semibold text-gray-900 dark:text-white">
-              ${market.yesPrice.toFixed(2)}
-            </span> */}
+            <span className="font-semibold text-gray-900 dark:text-white">
+              ₹{market.yesPrice.toFixed(2)}
+            </span>
           </div>
           <Progress
             percent={yesPercentage}
@@ -83,9 +81,9 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
             <span className="text-red-600 dark:text-red-400 font-medium flex items-center">
               <ArrowDownOutlined className="mr-1" /> No
             </span>
-            {/* <span className="font-semibold text-gray-900 dark:text-white">
-              ${market.noPrice.toFixed(2)}
-            </span> */}
+            <span className="font-semibold text-gray-900 dark:text-white">
+              ₹{market.noPrice.toFixed(2)}
+            </span>
           </div>
           <Progress
             percent={noPercentage}
