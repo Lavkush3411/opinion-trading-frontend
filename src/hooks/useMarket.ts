@@ -6,7 +6,7 @@ export const useMarket = (marketId: string) => {
   const { getData } = useAxios();
   return useQuery<Market>({
     queryKey: ['market', marketId],
-    queryFn: () => getData('/markets', marketId),
+    queryFn: () => getData(`/market/${marketId}`),
     enabled: !!marketId,
   });
 }; 

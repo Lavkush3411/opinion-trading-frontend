@@ -7,4 +7,7 @@ export const API_ROUTES = {
   MARKET: {
     MARKETS: "/market/markets",
   },
+  TRADE:{
+    CREATE:(marketId)=>`/order/${marketId}`
+  }
 };

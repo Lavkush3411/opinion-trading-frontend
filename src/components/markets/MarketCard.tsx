@@ -7,6 +7,8 @@ import {
 } from "@ant-design/icons";
 import { Market } from "../../types/api.types";
 import { useNavigate } from "react-router-dom";
+import { useModelStore } from "../../state/useModelStore";
+import { useMarketStore } from "../../state/useMarketStore";
 interface MarketCardProps {
   market: Market;
   onTrade: (market: Market) => void;
@@ -14,6 +16,8 @@ interface MarketCardProps {
 
 const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
   const navigate = useNavigate();
+  const { setIsTradeModalVisible } = useModelStore();
+  const { setSelectedMarket } = useMarketStore();
   const yesPercentage =
     (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
   const noPercentage = 100 - yesPercentage;
@@ -25,6 +29,18 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
       return `$${(volume / 1000).toFixed(1)}K`;
     }
     return `$${volume}`;
+  };
+
+  const handleYesButton = (e) => {
+    e.stopPropagation();
+    setIsTradeModalVisible(true);
+    setSelectedMarket(market.id);
+  };
+
+  const handleNoButton = (e) => {
+    e.stopPropagation();
+    setIsTradeModalVisible(true);
+    setSelectedMarket(market.id);
   };
 
   const navigateToTrade = (market: Market) => {
@@ -68,7 +84,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
               <ArrowUpOutlined className="mr-1" /> Yes
             </span>
             <span className="font-semibold text-gray-900 dark:text-white">
-              ₹{market.yesPrice.toFixed(2)}
+              ₹{market.yesPrice / 100}
             </span>
           </div>
           <Progress
@@ -83,7 +99,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
               <ArrowDownOutlined className="mr-1" /> No
             </span>
             <span className="font-semibold text-gray-900 dark:text-white">
-              ₹{market.noPrice.toFixed(2)}
+              ₹{market.noPrice / 100}
             </span>
           </div>
           <Progress
@@ -110,10 +126,16 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
           </div>
 
           <div className="mt-4 flex justify-end flex gap-4">
-            <Button className="bg-green-600 !hover:bg-red-700 shadow-sm w-full">
+            <Button
+              className="bg-green-600 !hover:bg-red-700 shadow-sm w-full"
+              onClick={handleYesButton}
+            >
               Yes
             </Button>
-            <Button className="bg-red-600 !hover:bg-red-700 shadow-sm w-full">
+            <Button
+              className="bg-red-600 !hover:bg-red-700 shadow-sm w-full"
+              onClick={handleNoButton}
+            >
               No
             </Button>
           </div>

@@ -13,8 +13,9 @@ export interface Trade {
   id: string;
   marketId: string;
   userId: string;
+  quantity:number;
   amount: number;
-  position: "YES" | "NO";
+  side: "favour" | "against";
   price: number;
   createdAt: string;
 }
@@ -41,9 +42,10 @@ export interface CreateMarketData {
 }
 
 export interface CreateTradeData {
-  marketId: string;
-  amount: number;
-  position: "YES" | "NO";
+  marketId:string;
+  quantity:number;
+  price: number;
+  side: "favour" | "against";
 }
 
 export interface ResolutionData {
