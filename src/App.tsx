@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import Home from "./pages/Home";
 import Trade from "./pages/Trade";
-import Markets from "./pages/Markets";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Auth from "./pages/Auth";
@@ -11,6 +10,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import { ROUTES } from "./_common/routes";
 import Protected from "./components/Protected";
+import ClosedMarkets from "./pages/Markets";
 
 const App: React.FC = () => {
   return (
@@ -30,12 +30,12 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path={ROUTES.DASHBOARD.HOME} element={<Home />} />
                   <Route
-                    path={`${ROUTES.DASHBOARD.TRADE}/:id`}
+                    path={`${ROUTES.DASHBOARD.TRADE}/:marketId`}
                     element={<Trade />}
                   />
                   <Route
                     path={ROUTES.DASHBOARD.MARKETS}
-                    element={<Markets />}
+                    element={<ClosedMarkets />}
                   />
                   <Route
                     path={ROUTES.DASHBOARD.PROFILE}

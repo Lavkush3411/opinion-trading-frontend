@@ -27,7 +27,7 @@ const ResetPassword = () => {
         values.newPassword
       );
       message.success("Password has been reset successfully!");
-      navigate(ROUTES.AUTH.LOGIN);
+      navigate(ROUTES.AUTH.AUTH);
     } catch (error) {
       console.log(error);
       message.error("Failed to reset password. Please try again.");
@@ -110,7 +110,7 @@ const ResetPassword = () => {
           <div className="text-center">
             <Button
               type="link"
-              onClick={() => navigate(ROUTES.AUTH.LOGIN)}
+              onClick={() => navigate(ROUTES.AUTH.AUTH)}
               className="text-blue-400 hover:text-blue-300"
             >
               Back to Login

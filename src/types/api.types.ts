@@ -8,6 +8,18 @@ export interface Market {
   yesPrice: number;
   noPrice: number;
 }
+export interface Order {
+ quantity: number,
+ price: number,
+ side: "favour" | "against",
+}
+
+export interface MarketDepth{
+  order_book:{ 
+  favour:Order[],
+  against:Order[]
+}
+}
 
 export interface Trade {
   id: string;

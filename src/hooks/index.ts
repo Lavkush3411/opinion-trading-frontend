@@ -9,3 +9,4 @@ export { useResolveMarket } from "./useResolveMarket";
 export { useActiveUser } from "./useActiveUser";
 export { useSignup } from "./useSignup";
 export { useLogin } from "./useLogin";
+export {useMarketDepth} from "./useMarketDepth"

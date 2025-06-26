@@ -1,7 +1,7 @@
 import React from "react";
 
-function Markets() {
-  return <div>Markets</div>;
+function ClosedMarkets() {
+  return <div>Closed Markets</div>;
 }
 
-export default Markets;
+export default ClosedMarkets;
