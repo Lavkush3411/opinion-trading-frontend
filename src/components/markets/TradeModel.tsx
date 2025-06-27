@@ -1,5 +1,5 @@
-import { Button, Form, InputNumber, Modal, Select, Spin } from "antd";
-import React from "react";
+import { Button, Form, InputNumber, Modal, Select, Slider, Spin } from "antd";
+import React, { useEffect, useState } from "react";
 import { useModelStore } from "../../state/useModelStore";
 import { useCreateTrade, useMarket } from "../../hooks";
 import { useMarketStore } from "../../state/useMarketStore";
@@ -8,8 +8,10 @@ const { Option } = Select;
 
 function TradeModel() {
   const { isTradeModalVisible, setIsTradeModalVisible } = useModelStore();
+  const [price, setPrice] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const [form] = Form.useForm();
-  const { mutate: trade, isPending: isTradeCreating } = useCreateTrade();
+  const { mutateAsync: trade, isPending: isTradeCreating } = useCreateTrade();
   const { selectedMarket } = useMarketStore();
   const { data, isPending } = useMarket(selectedMarket);
 
@@ -25,12 +27,24 @@ function TradeModel() {
         quantity: values.quantity,
         side: values.side.toLowerCase() === "yes" ? "favour" : "against",
       });
+      form.setFieldsValue({
+        price: 1,
+        quantity: 1,
+      });
+      setPrice(1);
+      setQuantity(1);
       setIsTradeModalVisible(false);
-      form.resetFields();
     } catch (error) {
       console.error("Trade failed:", error);
     }
   };
+
+  useEffect(() => {
+    form.setFieldsValue({
+      price: 1,
+      quantity: 1,
+    });
+  }, [form]);
 
   if (!selectedMarket) return;
   if (isPending) return <Spin />;
@@ -40,6 +54,7 @@ function TradeModel() {
       open={isTradeModalVisible}
       onCancel={() => setIsTradeModalVisible(false)}
       footer={null}
+      maskClosable={false}
       className="dark:bg-gray-800"
     >
       <Form
@@ -63,18 +78,36 @@ function TradeModel() {
           label="Amount"
           rules={[{ required: true, message: "Please enter an amount" }]}
         >
-          <InputNumber min={1} placeholder="Enter amount" className="w-full" />
+          <Slider
+            min={1}
+            max={9}
+            value={price}
+            onChange={(val) => {
+              setPrice(val);
+              form.setFieldValue("price", val); // Sync with form
+            }}
+            step={1}
+            className="w-full"
+          />{" "}
+          {price}
         </Form.Item>
         <Form.Item
           name="quantity"
           label="Quantity"
           rules={[{ required: true, message: "Please enter an quantity" }]}
         >
-          <InputNumber
+          <Slider
             min={1}
-            placeholder="Enter Quantity"
+            max={5}
+            step={1}
+            onChange={(val) => {
+              setQuantity(val);
+              form.setFieldValue("quantity", val);
+            }}
+            value={quantity}
             className="w-full"
-          />
+          />{" "}
+          {quantity}
         </Form.Item>
         <Form.Item>
           <Button
