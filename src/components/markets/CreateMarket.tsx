@@ -9,7 +9,6 @@ function CreateMarketModal() {
   const { mutate: createMarket } = useCreateMarket();
   const handleCreateMarket = (values) => {
     createMarket(values);
-    // form.resetFields();
   };
   return (
     <Modal

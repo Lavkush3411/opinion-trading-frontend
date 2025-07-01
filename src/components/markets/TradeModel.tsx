@@ -12,7 +12,7 @@ function TradeModel() {
   const [quantity, setQuantity] = useState(1);
   const [form] = Form.useForm();
   const { mutateAsync: trade, isPending: isTradeCreating } = useCreateTrade();
-  const { selectedMarket } = useMarketStore();
+  const { selectedMarket, tradeSide, setTradeSide } = useMarketStore();
   const { data, isPending } = useMarket(selectedMarket);
 
   const handleTradeSubmit = async (values: {
@@ -38,6 +38,11 @@ function TradeModel() {
       console.error("Trade failed:", error);
     }
   };
+  useEffect(() => {
+    if (tradeSide) {
+      form.setFieldValue("side", tradeSide);
+    }
+  }, [tradeSide]);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -68,7 +73,14 @@ function TradeModel() {
           label="Side"
           rules={[{ required: true, message: "Please select a Side" }]}
         >
-          <Select placeholder="Select position">
+          <Select
+            placeholder="Select position"
+            value={tradeSide}
+            onSelect={(val) => {
+              setTradeSide(val);
+              form.setFieldValue("side", val);
+            }}
+          >
             <Option value="YES">Yes</Option>
             <Option value="NO">No</Option>
           </Select>

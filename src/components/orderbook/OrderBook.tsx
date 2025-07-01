@@ -141,7 +141,7 @@ const Chart = ({
             }}
             labelStyle={{ color: "#9ca3af" }}
             cursor={{ fill: "rgba(255, 255, 255, 0.1)" }}
-            formatter={(value: number) => [`${value} orders`, "Quantity"]}
+            formatter={(value: number) => [`${value} Available`, "Quantity"]}
           />
           <Bar
             dataKey="quantity"

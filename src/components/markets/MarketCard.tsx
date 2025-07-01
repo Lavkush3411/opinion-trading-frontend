@@ -17,7 +17,7 @@ interface MarketCardProps {
 const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
   const navigate = useNavigate();
   const { setIsTradeModalVisible } = useModelStore();
-  const { setSelectedMarket } = useMarketStore();
+  const { setSelectedMarket, setTradeSide } = useMarketStore();
   const yesPercentage =
     (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
   const noPercentage = 100 - yesPercentage;
@@ -33,12 +33,14 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
 
   const handleYesButton = (e) => {
     e.stopPropagation();
+    setTradeSide("YES");
     setIsTradeModalVisible(true);
     setSelectedMarket(market.id);
   };
 
   const handleNoButton = (e) => {
     e.stopPropagation();
+    setTradeSide("NO");
     setIsTradeModalVisible(true);
     setSelectedMarket(market.id);
   };
