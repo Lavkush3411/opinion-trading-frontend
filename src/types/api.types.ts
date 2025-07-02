@@ -21,6 +21,17 @@ export interface MarketDepth{
 }
 }
 
+export interface UserType {
+  id: string,
+  name: string,
+  email: string,
+  password: string,
+  created_at: string,
+  updated_at: string,
+  balance: number,
+  hold_balance: number,
+}
+
 export interface Trade {
   id: string;
   marketId: string;
