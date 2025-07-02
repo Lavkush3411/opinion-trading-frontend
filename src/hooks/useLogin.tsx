@@ -10,13 +10,11 @@ import { useGlobalStore } from "../state/useGlobalStore";
 function useLogin() {
   const { postData } = useAxios();
   const navigate = useNavigate();
-  const { setUserId } = useGlobalStore();
   return useMutation({
     mutationFn: (data: LoginForm) => postData(API_ROUTES.AUTH.LOGIN, data),
     onSuccess: (response) => {
       message.success("Logged In");
       localStorage.setItem("token", response.token);
-      setUserId(response.user.id);
       navigate(ROUTES.DASHBOARD.HOME);
     },
   });

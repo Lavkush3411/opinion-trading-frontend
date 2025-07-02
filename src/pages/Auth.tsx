@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input, Button, Card, Tabs } from "antd";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../_common/routes";
-import { useLogin, useSignup } from "../hooks";
-
-
+import { useLogin, useSignup, useActiveUser } from "../hooks";
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
   const navigate = useNavigate();
   const { mutate: signup, isPending: isSigningUp } = useSignup();
   const { mutate: login, isPending: isLoggingIn } = useLogin();
+  const { data: user, isPending: isLoadingUser } = useActiveUser();
+
+  useEffect(() => {
+    if (user) {
+      navigate(ROUTES.DASHBOARD.HOME);
+    }
+  }, [user, navigate]);
+
+  if (isLoadingUser) return <div>Loading...</div>;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 p-4">

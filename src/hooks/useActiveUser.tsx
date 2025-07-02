@@ -8,6 +8,8 @@ const useActiveUser = () => {
   return useQuery({
     queryKey: [QUERY_KEYS.USER],
     queryFn: () => getData(API_ROUTES.AUTH.ACTIVE_USER),
+    staleTime: 0,
+    retry: false,
   });
 };
 

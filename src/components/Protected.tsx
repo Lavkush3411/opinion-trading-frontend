@@ -10,10 +10,10 @@ function Protected({ children }: { children: React.ReactNode }) {
   const { data, isLoading, error } = useActiveUser();
   const { setUserId } = useGlobalStore();
   useEffect(() => {
+    if (error || !data) navigate(ROUTES.AUTH.AUTH, { replace: true });
     if (data) setUserId(data.id);
-  }, [data, setUserId]);
+  }, [data, error]);
   if (isLoading) return <Spin size="large" />;
-  if (error || !data) navigate(ROUTES.AUTH.AUTH, { replace: true });
 
   return <div>{children}</div>;
 }

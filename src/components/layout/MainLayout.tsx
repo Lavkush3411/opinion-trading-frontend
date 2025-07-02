@@ -13,7 +13,9 @@ import { useActiveUser } from "../../hooks";
 import { ItemType } from "antd/es/menu/interface";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../_common/routes";
+import { QUERY_KEYS } from "../../_common/query-keys";
 
+import { useQueryClient } from "@tanstack/react-query";
 const { Header, Sider, Content } = Layout;
 
 interface MainLayoutProps {
@@ -24,8 +26,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const { data: userProfile } = useActiveUser();
+  const queryClient = useQueryClient();
   const logout = () => {
     localStorage.removeItem("token");
+    queryClient.removeQueries({ queryKey: [QUERY_KEYS.USER] });
     return navigate(ROUTES.AUTH.AUTH);
   };
 
