@@ -14,6 +14,7 @@ function CreateMarketModal() {
     <Modal
       open={isCreateMarketModalVisible}
       onCancel={() => setIsCreateMarketModalVisible(false)}
+      footer={null}
     >
       <Form
         name="CreateMarket"

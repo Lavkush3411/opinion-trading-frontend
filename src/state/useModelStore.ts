@@ -5,6 +5,8 @@ type ModelStore = {
   setIsTradeModalVisible: (isTradeModalVisible: boolean) => void;
   isCreateMarketModalVisible: boolean;
   setIsCreateMarketModalVisible: (isTradeModalVisible: boolean) => void;
+  isDeclareResultModalVisible: boolean;
+  setIsDeclareResultModalVisible: (isDeclareResultModalVisible: boolean) => void;
 };
 
 export const useModelStore = create<ModelStore>((set) => ({
@@ -13,4 +15,7 @@ export const useModelStore = create<ModelStore>((set) => ({
   isCreateMarketModalVisible: false,
   setIsCreateMarketModalVisible: (isCreateMarketModalVisible) =>
     set({ isCreateMarketModalVisible }),
+  isDeclareResultModalVisible: false,
+  setIsDeclareResultModalVisible: (isDeclareResultModalVisible) =>
+    set({ isDeclareResultModalVisible }),
 }));

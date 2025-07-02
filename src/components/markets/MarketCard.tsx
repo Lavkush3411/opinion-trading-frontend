@@ -1,10 +1,6 @@
 import React from "react";
-import { Card, Progress, Button, Tag, Tooltip } from "antd";
-import {
-  ArrowUpOutlined,
-  ArrowDownOutlined,
-  InfoCircleOutlined,
-} from "@ant-design/icons";
+import { Card, Progress, Button, Tag } from "antd";
+import { ArrowUpOutlined, ArrowDownOutlined } from "@ant-design/icons";
 import { Market } from "../../types/api.types";
 import { useNavigate } from "react-router-dom";
 import { useModelStore } from "../../state/useModelStore";
@@ -16,7 +12,8 @@ interface MarketCardProps {
 
 const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
   const navigate = useNavigate();
-  const { setIsTradeModalVisible } = useModelStore();
+  const { setIsTradeModalVisible, setIsDeclareResultModalVisible } =
+    useModelStore();
   const { setSelectedMarket, setTradeSide } = useMarketStore();
   const yesPercentage =
     (market.yesPrice / (market.yesPrice + market.noPrice)) * 100;
@@ -65,7 +62,11 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
 
           <Button
             className="bg-green-600 !hover:bg-red-700 shadow-sm "
-            onClick={() => {}}
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedMarket(market.id);
+              setIsDeclareResultModalVisible(true);
+            }}
           >
             Declare Result
           </Button>

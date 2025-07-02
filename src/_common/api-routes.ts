@@ -6,7 +6,8 @@ export const API_ROUTES = {
   },
   MARKET: {
     MARKETS: "/market/markets",
-    DEPTH:(id:string)=>`/market/depth/${id}`
+    DEPTH: (id: string) => `/market/depth/${id}`,
+    DECLARE_RESULT: (id: string) => `/market/${id}/declare-result`,
   },
   TRADE: {
     CREATE: (marketId) => `/order/${marketId}`,

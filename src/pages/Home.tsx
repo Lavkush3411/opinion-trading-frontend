@@ -8,6 +8,7 @@ import CreateMarketModal from "../components/markets/CreateMarket";
 import { useModelStore } from "../state/useModelStore";
 import { useMarketStore } from "../state/useMarketStore";
 import TradeModel from "../components/markets/TradeModel";
+import DeclareResultCard from "../components/markets/DeclareResultCard";
 
 const { Option } = Select;
 
@@ -43,6 +44,7 @@ const Home: React.FC = () => {
     <div className="min-h-screen w-full bg-gray-900">
       <CreateMarketModal />
       <TradeModel />
+      <DeclareResultCard />
       <div className="w-full px-4 py-8">
         <div className="flex flex-col space-y-8 max-w-7xl mx-auto">
           {/* Header Section */}
