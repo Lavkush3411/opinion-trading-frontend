@@ -56,12 +56,19 @@ const MarketCard: React.FC<MarketCardProps> = ({ market }) => {
       onClick={() => navigateToTrade(market)}
       title={
         <div className="flex justify-between items-center">
-          <span className="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">
-            {market.question}
-          </span>
           <Tag color="green" className="flex-shrink-0">
             Active
           </Tag>
+          <span className="text-lg font-semibold text-gray-900 dark:text-white truncate pr-2">
+            {market.question}
+          </span>
+
+          <Button
+            className="bg-green-600 !hover:bg-red-700 shadow-sm "
+            onClick={() => {}}
+          >
+            Declare Result
+          </Button>
         </div>
       }
       headStyle={{
