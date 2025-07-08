@@ -114,7 +114,7 @@ const UserProfilePage = ({ user }: { user: UserType }) => {
         {/* Trades Section */}
         <div>
           <Title level={5} style={{ color: "white", marginBottom: 16 }}>
-            Recent Trades
+            Transaction History
           </Title>
           <Table
             columns={tradeColumns}

@@ -45,9 +45,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     {
       key: "closed-markets",
       icon: <LineChartOutlined />,
-      label: "Closed Markets",
+      label: "Portfolio",
       onClick: () => {
-        navigate("/markets");
+        navigate("/portfolio");
       },
     },
     {

@@ -10,7 +10,7 @@ import ResetPassword from "./pages/ResetPassword";
 import ForgotPassword from "./pages/ForgotPassword";
 import { ROUTES } from "./_common/routes";
 import Protected from "./components/Protected";
-import ClosedMarkets from "./pages/Markets";
+import Portfolio from "./pages/Portfolio";
 
 const App: React.FC = () => {
   return (
@@ -34,8 +34,8 @@ const App: React.FC = () => {
                     element={<Trade />}
                   />
                   <Route
-                    path={ROUTES.DASHBOARD.MARKETS}
-                    element={<ClosedMarkets />}
+                    path={ROUTES.DASHBOARD.PORTFOLIO}
+                    element={<Portfolio />}
                   />
                   <Route
                     path={ROUTES.DASHBOARD.PROFILE}

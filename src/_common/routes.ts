@@ -6,7 +6,7 @@ export const ROUTES = {
   },
   DASHBOARD: {
     HOME: "/",
-    MARKETS: "/markets",
+    PORTFOLIO: "/portfolio",
     TRADE: "/trade",
     PROFILE: "/profile",
     SETTINGS: "/settings",
