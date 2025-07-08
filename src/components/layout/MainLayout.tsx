@@ -73,11 +73,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       key: "profile",
       icon: <UserOutlined />,
       label: "Profile",
+      onClick: () => {
+        navigate("/profile");
+      },
     },
     {
       key: "settings",
       icon: <SettingOutlined />,
       label: "Settings",
+      onClick: () => {
+        navigate("/settings");
+      },
     },
     {
       type: "divider",
@@ -125,7 +131,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
               placement="bottomRight"
             >
               <div className="flex items-center space-x-2 cursor-pointer">
-                <Avatar icon={<UserOutlined />} />
+                <Avatar
+                  src="https://i.pravatar.cc/150?img=12"
+                  icon={<UserOutlined />}
+                />
                 {!collapsed && (
                   <span className="text-sm font-medium text-white">
                     {userProfile?.name || "User"}

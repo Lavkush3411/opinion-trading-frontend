@@ -4,6 +4,7 @@ import {
   MailOutlined,
   WalletOutlined,
   TrophyOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { Trade, UserType } from "../../types/api.types";
 
@@ -71,6 +72,10 @@ const UserProfilePage = ({ user }: { user: UserType }) => {
           <Title level={3} style={{ color: "white" }}>
             {user.name}
           </Title>
+          <span className="flex justify-center gap-2 mb-4">
+            <MailOutlined className="cursor-pointer" />
+            <div style={{ fontWeight: 600, fontSize: 14 }}>{user.email}</div>
+          </span>
           <div
             style={{
               display: "flex",
@@ -79,11 +84,12 @@ const UserProfilePage = ({ user }: { user: UserType }) => {
               flexWrap: "wrap",
             }}
           >
-            {/* Email Box */}
+            {/* Leaderboard Box */}
             <Box>
-              <MailOutlined style={{ fontSize: 24, color: "#9ca3af" }} />
-              <div style={{ fontWeight: 600, fontSize: 14 }}>{user.email}</div>
-              <Text style={{ color: "#9ca3af", fontSize: 12 }}>Email</Text>
+              <PlusOutlined
+                style={{ fontSize: 36, color: "#9ca3af", cursor: "pointer" }}
+              />
+              <Text style={{ color: "#9ca3af", fontSize: 12 }}>Add Funds</Text>
             </Box>
 
             {/* Balance Box */}
