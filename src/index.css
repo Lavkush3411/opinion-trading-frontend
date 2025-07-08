@@ -100,3 +100,23 @@ button:focus-visible {
 .ant-table-tbody > tr.ant-table-row:hover > td {
   background-color: #1f2937 !important;
 }
+
+/* Center the toggle handle vertically */
+.ant-switch .ant-switch-handle {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+/* Style the text inside the switch */
+/* .ant-switch .ant-switch-inner {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.ant-switch {
+  width: 80px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
