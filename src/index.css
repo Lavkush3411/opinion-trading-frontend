@@ -73,3 +73,30 @@ button:focus-visible {
   background-color: transparent;
   background-color: #1f2937;
 }
+
+/* Dark theme for Ant Design Table */
+.ant-table {
+  background-color: #111827 !important;
+  color: #ffffff;
+  border-color: #374151;
+}
+
+.ant-table-container {
+  background-color: #111827 !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: #1f2937 !important;
+  color: #d1d5db !important;
+  border-color: #374151 !important;
+}
+
+.ant-table-tbody > tr > td {
+  background-color: #111827 !important;
+  color: #ffffff !important;
+  border-color: #374151 !important;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background-color: #1f2937 !important;
+}
