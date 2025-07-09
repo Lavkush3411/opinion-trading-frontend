@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Layout, Typography, Button, Table, Switch } from "antd";
+import { Layout, Typography, Button, Table, Switch, Spin } from "antd";
+import { useUserTrades } from "../hooks";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -58,6 +59,12 @@ const tradeColumns = [
 
 const PortfolioPage = () => {
   const [tab, setTab] = useState<"active" | "closed">("active");
+
+  const { data, isPending } = useUserTrades(tab === "active" ? true : false);
+
+  if (isPending) return <Spin />;
+
+  console.log(data);
 
   return (
     <Layout

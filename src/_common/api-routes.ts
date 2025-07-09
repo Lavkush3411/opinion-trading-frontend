@@ -10,7 +10,8 @@ export const API_ROUTES = {
     DECLARE_RESULT: (id: string) => `/market/${id}/declare-result`,
   },
   TRADE: {
-    CREATE: (marketId) => `/order/${marketId}`,
+    CREATE: (marketId:string) => `/order/${marketId}`,
+    TRADES:(active:boolean=false)=>`/trade/trades?active=${active}`
   },
   USER: {
     GET_USER: (id: string) => `/user/${id}`,
