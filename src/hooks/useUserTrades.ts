@@ -5,7 +5,7 @@ import { API_ROUTES } from '../_common/api-routes';
 
 export const useUserTrades = (active:boolean) => {
   const { getData } = useAxios();
-  return useQuery<Trade[]>({
+  return useQuery<{fulfilled:Trade[], unfulfilled:Trade[]}>({
     queryKey: ['userTrades', active],
     queryFn: () => getData(API_ROUTES.TRADE.TRADES(active)),
   });

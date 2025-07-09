@@ -1,75 +1,53 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Layout, Typography, Button, Table, Switch, Spin } from "antd";
 import { useUserTrades } from "../hooks";
+import { useGlobalStore } from "../state/useGlobalStore";
 
 const { Content } = Layout;
 const { Title } = Typography;
-
-const activeTrades = [
-  {
-    key: 1,
-    market: "BTC/USDT",
-    type: "Buy",
-    quantity: 0.5,
-    price: 31000,
-    pnl: "+2.1%",
-  },
-  {
-    key: 2,
-    market: "ETH/USDT",
-    type: "Sell",
-    quantity: 1.2,
-    price: 1950,
-    pnl: "+0.9%",
-  },
-];
-
-const closedTrades = [
-  {
-    key: 1,
-    market: "SOL/USDT",
-    type: "Buy",
-    quantity: 3,
-    price: 150,
-    pnl: "-1.5%",
-  },
-];
-
-const tradeColumns = [
-  { title: "Market", dataIndex: "market", key: "market" },
-  { title: "Type", dataIndex: "type", key: "type" },
-  { title: "Quantity", dataIndex: "quantity", key: "quantity" },
-  {
-    title: "Price",
-    dataIndex: "price",
-    key: "price",
-    render: (value: number) => `₹${value}`,
-  },
-  {
-    title: "PnL",
-    dataIndex: "pnl",
-    key: "pnl",
-    render: (text: string) => (
-      <span style={{ color: text.startsWith("-") ? "#f87171" : "#4ade80" }}>
-        {text}
-      </span>
-    ),
-  },
-];
 
 const PortfolioPage = () => {
   const [tab, setTab] = useState<"active" | "closed">("active");
 
   const { data, isPending } = useUserTrades(tab === "active" ? true : false);
+  const { userId } = useGlobalStore();
+  const tradeColumns = useMemo(() => {
+    return [
+      // { title: "Market", dataIndex: "market", key: "market" },
+      // { title: "Type", dataIndex: "type", key: "type" },
+      { title: "Quantity", dataIndex: "quantity", key: "quantity" },
+      {
+        title: "Price",
+        dataIndex: "price",
+        key: "price",
+        render: (value: number, data) => {
+          return data.favour_user_id === userId
+            ? `₹${data.favour_price}`
+            : `₹${data.against_price}`;
+        },
+      },
+      // {
+      //   title: "PnL",
+      //   dataIndex: "pnl",
+      //   key: "pnl",
+      //   render: (text: string) => (
+      //     <span style={{ color: text.startsWith("-") ? "#f87171" : "#4ade80" }}>
+      //       {text}
+      //     </span>
+      //   ),
+      // },
+    ];
+  }, [userId]);
 
   if (isPending) return <Spin />;
 
-  console.log(data);
+  const dataSource = data?.fulfilled;
+
+  console.log(data, userId);
 
   return (
     <Layout
       style={{
-        minHeight: "100vh",
         backgroundColor: "rgb(17, 24, 39)",
         padding: "2rem",
       }}
@@ -106,12 +84,11 @@ const PortfolioPage = () => {
         <div style={{ flexGrow: 1, overflow: "auto" }}>
           <Table
             columns={tradeColumns}
-            dataSource={tab === "active" ? activeTrades : closedTrades}
+            dataSource={dataSource}
             pagination={false}
             bordered={false}
             style={{ backgroundColor: "transparent" }}
             rowClassName={() => "custom-row"}
-            scroll={{ x: "100%", y: "100%" }}
           />
         </div>
       </Content>
