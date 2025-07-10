@@ -2,6 +2,7 @@ import React, { useMemo, useState } from "react";
 import { Layout, Typography, Button, Table, Switch, Spin } from "antd";
 import { useUserTrades } from "../hooks";
 import { useGlobalStore } from "../state/useGlobalStore";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 const { Title } = Typography;
@@ -11,37 +12,56 @@ const PortfolioPage = () => {
 
   const { data, isPending } = useUserTrades(tab === "active" ? true : false);
   const { userId } = useGlobalStore();
+  const navigate = useNavigate();
   const tradeColumns = useMemo(() => {
     return [
-      // { title: "Market", dataIndex: "market", key: "market" },
-      // { title: "Type", dataIndex: "type", key: "type" },
-      { title: "Quantity", dataIndex: "quantity", key: "quantity" },
+      {
+        title: "Market",
+        dataIndex: "opinionId",
+        key: "price",
+        render: (value: string) => (
+          <span
+            className="cursor-pointer"
+            onClick={() => navigate(`/trade/${value}`)}
+          >
+            {value}
+          </span>
+        ),
+      },
+      { title: "Quantity", dataIndex: "quantity", key: "price" },
       {
         title: "Price",
         dataIndex: "price",
         key: "price",
-        render: (value: number, data) => {
-          return data.favour_user_id === userId
-            ? `₹${data.favour_price}`
-            : `₹${data.against_price}`;
-        },
       },
-      // {
-      //   title: "PnL",
-      //   dataIndex: "pnl",
-      //   key: "pnl",
-      //   render: (text: string) => (
-      //     <span style={{ color: text.startsWith("-") ? "#f87171" : "#4ade80" }}>
-      //       {text}
-      //     </span>
-      //   ),
-      // },
+      {
+        title: "Opinion",
+        dataIndex: "side",
+        key: "price",
+      },
     ];
   }, [userId]);
 
   if (isPending) return <Spin />;
 
-  const dataSource = data?.fulfilled;
+  console.log(data?.unfulfilled);
+  const dataSource = [
+    ...(data?.unfulfilled ?? []).flatMap((order) => ({
+      ...order,
+      price: `₹${order.price / 100}`,
+      side: order.side === "favour" ? "Yes" : "No",
+    })),
+    ...(data?.fulfilled ?? []).flatMap((trade) => ({
+      userId,
+      quantity: trade.quantity,
+      opinionId: trade.opinionId,
+      price:
+        trade.favourUserId === userId
+          ? `₹${trade.favourPrice / 100}`
+          : `₹${trade.againstPrice / 100}`,
+      side: trade.favourUserId === userId ? "Yes" : "No",
+    })),
+  ];
 
   console.log(data, userId);
 

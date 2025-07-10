@@ -32,9 +32,9 @@ export interface UserType {
   hold_balance: number,
 }
 
-export interface Trade {
+export interface Order {
   id: string;
-  marketId: string;
+  opinionId: string;
   userId: string;
   quantity:number;
   amount: number;
@@ -42,6 +42,18 @@ export interface Trade {
   price: number;
   createdAt: string;
 }
+
+export interface TradeModel {
+  id: string;
+  opinionId: string;
+  favourUserId: string;
+  againstUserId: string;
+  favourPrice: number;
+  againstPrice: number;
+  quantity: number;
+}
+
+
 
 export interface UserProfile {
   id: string;
