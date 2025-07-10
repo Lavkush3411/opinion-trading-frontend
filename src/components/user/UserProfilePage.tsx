@@ -1,47 +1,49 @@
 import React from "react";
-import { Layout, Avatar, Typography, Table, Tag, Divider } from "antd";
+import { Layout, Avatar, Typography, Table, Tag, Divider, Spin } from "antd";
 import {
   MailOutlined,
   WalletOutlined,
   TrophyOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import { Trade, UserType } from "../../types/api.types";
+import { TradeModel, UserType } from "../../types/api.types";
+import { useUserTransactions } from "../../hooks";
+import { formatDate } from "../../_common/helper-functions";
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
-const tradeColumns = [
-  {
-    title: "Opinion",
-    dataIndex: "side",
-    key: "side",
-    render: (side: "favour" | "against") => (
-      <Tag color={side === "favour" ? "green" : "red"}>
-        {side === "favour" ? "Yes" : "No"}
-      </Tag>
-    ),
-  },
-  {
-    title: "Price",
-    dataIndex: "price",
-    key: "price",
-    render: (price: number) => `₹${(price / 100).toFixed(2)}`,
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-    key: "quantity",
-  },
-  {
-    title: "Date",
-    dataIndex: "date",
-    key: "createdAt",
-  },
-];
-
 const UserProfilePage = ({ user }: { user: UserType }) => {
-  const trades: Trade[] = [];
+  const trades: TradeModel[] = [];
+  const { data, isPending } = useUserTransactions();
+
+  if (isPending) return <Spin />;
+  console.log(data);
+
+  const tradeColumns = [
+    {
+      title: "Type",
+      // dataIndex: "price",
+      key: "price",
+      render: (_: number, data) =>
+        data.new_balance - data.old_balance > 0 ? "CREDIT" : "DEBIT",
+    },
+    {
+      title: "Amount",
+      dataIndex: "quantity",
+      key: "quantity",
+      render: (_: number, data) =>
+        `${data.new_balance - data.old_balance < 0 ? "-" : ""}₹${Math.abs(
+          (data.new_balance - data.old_balance) / 100
+        )}`,
+    },
+    {
+      title: "Date",
+      dataIndex: "created_at",
+      key: "createdAt",
+      render: (date) => formatDate(date),
+    },
+  ];
 
   return (
     <Layout
@@ -124,7 +126,7 @@ const UserProfilePage = ({ user }: { user: UserType }) => {
           </Title>
           <Table
             columns={tradeColumns}
-            dataSource={trades.map((t, i) => ({ ...t, key: i }))}
+            dataSource={data}
             pagination={{ pageSize: 5 }}
             bordered
             rowClassName={() => "custom-row"}

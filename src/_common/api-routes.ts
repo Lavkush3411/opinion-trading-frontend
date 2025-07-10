@@ -15,5 +15,6 @@ export const API_ROUTES = {
   },
   USER: {
     GET_USER: (id: string) => `/user/${id}`,
+    GET_TRANSACTIONS:'/user/transactions'
   },
 };
